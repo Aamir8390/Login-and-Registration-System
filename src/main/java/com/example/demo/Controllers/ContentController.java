@@ -5,13 +5,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class ContentController {
+
     @GetMapping("/login")
-    public String login(){
-        return "login";
-    }
-    @GetMapping("/req/signup")
-    public String signup(){
-        return "signup";
+    public String showLogin() {
+        return "login"; // Make sure this matches your template name
     }
 
+    @GetMapping("/signup")
+    public String showSignup() {
+        return "signup"; // Make sure this matches your template name
+    }
+
+    @GetMapping("/home")
+    public String showHome() {
+        return "home"; // You'll need to create this template
+    }
 }
