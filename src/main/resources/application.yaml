@@ -1,22 +1,55 @@
-server:
-  port: 9090
-
+# PostgreSQL Spring Boot Configuration
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/LoginAndRegistration
     username: postgres
     password: 123456
+    driver-class-name: org.postgresql.Driver
+
 
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: update  # Drops and recreates schema on startup/shutdown
+    show-sql: true
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
-        show_sql: true
+        jdbc:
+          lob:
+            non_contextual_creation:
+        # Uncomment for advanced PostgreSQL settings:
+        # default_schema: public
+        # temp.use_jdbc_metadata_defaults: false
+        # connection.provider_disables_autocommit: true
 
-  thymeleaf:
-    prefix: classpath:/templates/
-    suffix: .html
-    cache: false
+  sql:
+    init:
+      mode: always  # Optional for initial data seeding
+
+# Server Configuration
+server:
+  port: 8080
+
+
+# Logging Configuration (PostgreSQL-specific)
+logging:
+  level:
+    org:
+      hibernate.SQL:
+      hibernate.type.descriptor.sql.BasicBinder: TRACE
+      springframework.web: INFO
+    com:
+      zaxxer.hikari: INFO
+    postgresql: WARN
+
+# Health Check for PostgreSQL
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+  endpoint:
+    health:
+      show-details: always
+    health.db.enabled: true

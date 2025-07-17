@@ -1,5 +1,6 @@
 package com.example.demo.Security;
 
+import com.example.demo.Model.MyAppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,8 +23,8 @@ import lombok.AllArgsConstructor;
 @EnableWebSecurity
 public class Config {
 
- /*   @Autowired
-//    private final MyAppUserService appUserService;
+  @Autowired
+   private final MyAppUserService appUserService;
 
 
     @Bean
@@ -42,15 +43,43 @@ public class Config {
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
-    } */
+    }
 
+    // Another way
     @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+                .csrf(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/req/signup", "/req/login", "/css/**", "/js/**").permitAll()
+                        .anyRequest().authenticated()
+                )
+                .formLogin(login -> login
+                        .loginPage("/login")
+                        .loginProcessingUrl("/req/login")
+                        .defaultSuccessUrl("/index", true)
+                        .failureUrl("/login?error=true")
+                        .permitAll()
+                )
+                .logout(logout -> logout
+                        .logoutSuccessUrl("/login?logout=true")
+                        .permitAll()
+                );
+        return http.build();
+    }
+
+
+
+
+  /*
+    Not working
+
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
         return httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
                 .formLogin(httpForm ->{
                     httpForm.loginPage("/login").permitAll();
-                    httpForm.defaultSuccessUrl("/index");
+                    httpForm.defaultSuccessUrl("/index",true);
 
                 })
 
@@ -60,6 +89,6 @@ public class Config {
                     registry.anyRequest().authenticated();
                 })
                 .build();
-    }
+    }  */
 
 }

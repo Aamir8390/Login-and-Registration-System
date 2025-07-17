@@ -8,16 +8,16 @@ public class ContentController {
 
     @GetMapping("/login")
     public String showLogin() {
-        return "login"; // Make sure this matches your template name
+        return "login";
     }
 
     @GetMapping("/req/signup")
     public String showSignup() {
-        return "signup"; // Make sure this matches your template name
+        return "signup";
     }
 
-    @GetMapping("/home")
-    public String showHome() {
-        return "home"; // You'll need to create this template
+    @GetMapping("/index")
+    public String home() {
+        return "index";
     }
 }
