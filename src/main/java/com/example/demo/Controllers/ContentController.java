@@ -11,7 +11,7 @@ public class ContentController {
         return "login"; // Make sure this matches your template name
     }
 
-    @GetMapping("/signup")
+    @GetMapping("/req/signup")
     public String showSignup() {
         return "signup"; // Make sure this matches your template name
     }
