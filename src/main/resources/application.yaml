@@ -6,6 +6,20 @@ spring:
     password: 123456
     driver-class-name: org.postgresql.Driver
 
+    mail:
+      host : smtp.gmail.com
+      port: 890
+      username: ""
+      password : ""
+      properties :
+        mail :
+          smtp :
+            auth : true
+            starttls:
+              enable : true
+
+
+
 
   jpa:
     hibernate:
@@ -27,9 +41,7 @@ spring:
     init:
       mode: always  # Optional for initial data seeding
 
-# Server Configuration
-server:
-  port: 8080
+
 
 
 # Logging Configuration (PostgreSQL-specific)
