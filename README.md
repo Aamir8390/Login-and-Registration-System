@@ -58,5 +58,5 @@ It’s ideal for beginners in Java and Spring Boot who want hands-on experience 
 
 ---
 
-## 📁 Project Structure
+
 
