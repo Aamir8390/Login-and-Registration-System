@@ -1,7 +1,7 @@
 # Use an official Java runtime as the base image
-FROM openjdk:17-jdk-alpine
+FROM openjdk:17-jdk-slim
 
-
+WORKDIR /app
 
 # Copy your built Spring Boot jar to the container
 COPY target/LoginAndRegistration-0.0.1-SNAPSHOT.jar app.jar
@@ -10,4 +10,4 @@ COPY target/LoginAndRegistration-0.0.1-SNAPSHOT.jar app.jar
 EXPOSE 8080
 
 # Run the jar file
-ENTRYPOINT ["java", "-jar", "/app.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
