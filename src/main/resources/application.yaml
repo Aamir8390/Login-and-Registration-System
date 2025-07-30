@@ -1,16 +1,84 @@
+# PostgreSQL Spring Boot Configuration
 spring:
+
+
   datasource:
-    url: ${SPRING_DATASOURCE_URL}
-    username: ${SPRING_DATASOURCE_USERNAME}
-    password: ${SPRING_DATASOURCE_PASSWORD}
+    url: jdbc:postgresql://example_postgresql_projects_user:5432/example_postgresql_projects
+    username: example_postgresql_projects_user
+    password: sS2N4F6DFuI2Cg5JlbPKsqQBIePH8Ajp
     driver-class-name: org.postgresql.Driver
 
+
+    mail:
+      host : smtp.gmail.com
+      port: 890
+      username: ""
+      password : ""
+      properties :
+        mail :
+          smtp :
+            auth : true
+            starttls:
+              enable : true
+
+
+
+
+
+
+
+
   jpa:
+
+
     hibernate:
-      ddl-auto: update
+
+
+      ddl-auto: update  # Drops and recreates schema on startup/shutdown
+    show-sql: true
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+        jdbc:
+          lob:
+            non_contextual_creation:
+        # Uncomment for advanced PostgreSQL settings:
+        # default_schema: public
+        # temp.use_jdbc_metadata_defaults: false
+        # connection.provider_disables_autocommit: true
 
-server:
-  port: 8080
+
+  sql:
+    init:
+      mode: always  # Optional for initial data seeding
+
+
+
+
+
+
+
+
+# Logging Configuration (PostgreSQL-specific)
+logging:
+  level:
+    org:
+      hibernate.SQL:
+      hibernate.type.descriptor.sql.BasicBinder: TRACE
+      springframework.web: INFO
+    com:
+      zaxxer.hikari: INFO
+    postgresql: WARN
+
+
+# Health Check for PostgreSQL
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+  endpoint:
+    health:
+      show-details: always
+    health.db.enabled: true
