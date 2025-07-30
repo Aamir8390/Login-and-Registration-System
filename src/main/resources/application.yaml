@@ -3,7 +3,7 @@ spring:
 
 
   datasource:
-    url: jdbc:postgresql://example_postgresql_projects_user:5432/example_postgresql_projects
+    url: jdbc:postgresql://dpg-d24tq9fdiees739lu7t0-a:5432/example_postgresql_projects
     username: example_postgresql_projects_user
     password: sS2N4F6DFuI2Cg5JlbPKsqQBIePH8Ajp
     driver-class-name: org.postgresql.Driver
